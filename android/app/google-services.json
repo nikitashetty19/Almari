@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "636657363748",
+    "project_id": "sentimentanalysis-7ba59",
+    "storage_bucket": "sentimentanalysis-7ba59.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636657363748:android:a915f3a3a5a907d0d721b1",
+        "android_client_info": {
+          "package_name": "com.example.almari"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjKMiq6ucLQBSlamqkbfKKnS2bxZe1d8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636657363748:android:8f08c20c28bc1ecdd721b1",
+        "android_client_info": {
+          "package_name": "com.example.sentimentanalysis"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjKMiq6ucLQBSlamqkbfKKnS2bxZe1d8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
