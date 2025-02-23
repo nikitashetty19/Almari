@@ -1,13 +1,11 @@
-class Clothing {
-  final String imagePath;
-  Clothing(this.imagePath);
-}
-
-
-// class ClothingItem {
-//   final String id;
-//   final String imageUrl;
-
-//   ClothingItem({required this.id, required this.imageUrl});
+// class Clothing {
+//   final String imagePath;
+//   Clothing(this.imagePath);
 // }
 
+class Clothing {
+  final String id;
+  final String imagePath;
+
+  Clothing({required this.id, required this.imagePath});
+}

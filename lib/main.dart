@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'views/swiping_screen.dart';
+// import 'views/swiping_screen.dart';
+import 'package:almari/views/signup_page.dart';
+// import 'package:almari/views/login.dart';
+import 'package:almari/controllers/auth_controller.dart';
 import 'package:almari/controllers/swiping_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -10,8 +13,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  Get.put(AuthController());
   Get.put(SwipingController());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,14 +27,16 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Swipe Images',
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 224, 196, 185),
-        appBarTheme: AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 224, 196,
-              185), // Optional: You can also set appBar background color
+        scaffoldBackgroundColor: const Color.fromARGB(255, 255, 239, 254),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 255, 239,
+              254), // Optional: You can also set appBar background color
         ),
         // primarySwatch: Colors.blue,
       ),
-      home: const SwipingScreen(),
+      // home: const SwipingScreen(),
+      // home: LoginPage(),
+      home: SignupPage(),
     );
   }
 }
