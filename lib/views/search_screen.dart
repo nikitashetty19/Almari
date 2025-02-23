@@ -18,54 +18,6 @@ class SearchScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          // TextField with a Send button
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                // Input Field
-                Expanded(
-                  child: TextField(
-                    controller: textController,
-                    onChanged: (value) => controller.userInput.value = value,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      hintText: 'Type here...',
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none, // No border by default
-                        borderRadius:
-                            BorderRadius.circular(10), // Rounded corners
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: Colors.grey), // Grey border when not focused
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: Colors.blue,
-                            width: 2), // Blue border when focused
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 12),
-                    ),
-                  ),
-                ),
-                // Send Button
-                IconButton(
-                  icon: const Icon(Icons.send),
-                  onPressed: () {
-                    if (controller.userInput.value.isNotEmpty) {
-                      controller.addMessage(controller.userInput.value);
-                      textController.clear();
-                      controller.clearInput();
-                    }
-                  },
-                ),
-              ],
-            ),
-          ),
           // Messages List
           Expanded(
             child: Obx(() => ListView.builder(
@@ -83,8 +35,7 @@ class SearchScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: isSentByUser
                               ? Colors.blue[100]
-                              : const Color.fromARGB(255, 231, 225,
-                                  225), // Different colors for messages
+                              : const Color.fromARGB(255, 231, 225, 225),
                           borderRadius: BorderRadius.only(
                             topLeft: const Radius.circular(16),
                             topRight: const Radius.circular(16),
@@ -107,6 +58,57 @@ class SearchScreen extends StatelessWidget {
                     );
                   },
                 )),
+          ),
+          if (controller.isLoading.value)
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: CircularProgressIndicator(),
+            ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+                // Input Field
+                Expanded(
+                  child: TextField(
+                    controller: textController,
+                    onChanged: (value) => controller.userInput.value = value,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      hintText: 'Type here...',
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: Colors.blue, width: 2),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 12),
+                    ),
+                  ),
+                ),
+                // Send Button
+                IconButton(
+                  icon: const Icon(Icons.send),
+                  onPressed: () {
+                    final message = controller.userInput.value;
+                    if (message.isNotEmpty) {
+                      controller.addMessage(message); // Add user message
+                      textController.clear();
+                      controller.clearInput();
+                      controller.addResponse(message); // Send message to API
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
         ],
       ),
