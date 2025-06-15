@@ -7,13 +7,28 @@ client = Groq(
     api_key = GROQ_API_KEY
 )
 
-def answer_query(query, liked_images):
+def answer_query(query, liked_images,gender):
     prompt = f"""
-    below given is the question asked by the user 
-    {query}
-    and these are the users liked outfit images data
+    You are a fashion styling assistant. Your job is to provide *short, precise* outfit suggestions based on the user's liked outfits.
+    
+    *Users Gender*
+    "{gender}"
+
+    *User Query*
+    "{query}"
+
+    *Users Liked Outfits*
     {liked_images}
-    answer this by giving one single choice to the user 
+
+    *Instructions*
+    1. Analyze the users liked outfits to understand their style.
+    2. Recommend *one best outfit choice* based on the query.
+    3. Keep the response *short and to the point* (1 sentences max).
+    4. Avoid unnecessary explanations. Provide *only the recommended outfit* in a clear format.
+    
+    Now, provide your best recommendation:
+
+ 
     """
 
     chat_completion = client.chat.completions.create(
@@ -24,7 +39,8 @@ def answer_query(query, liked_images):
                 "content": prompt,
             }
         ],
-        model="llama3-8b-8192",
+        # model="llama3-8b-8192",
+        model="llama-3.3-70b-versatile",
     )
 
     return chat_completion.choices[0].message.content
